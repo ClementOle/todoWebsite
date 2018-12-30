@@ -1,12 +1,16 @@
 const urlApi = "http://localhost:8083";
-const id = 26;
+
+const page = location.search.substr(6) || 0;
 
 const tasksList = document.querySelector(".tasksList");
 const newTask = document.getElementById("newTask");
 const textTask = document.getElementById("text");
 
+
+const id = 26;
+
 function getListTask(idUtilisateur) {
-    let url = urlApi + "/" + idUtilisateur + "/tasks/?page=0";
+    let url = urlApi + "/" + idUtilisateur + "/tasks/?page=" + page;
     $.get(url, function (data) {
         afficheListTask(data.content);
     });
@@ -41,8 +45,6 @@ function afficheListTask(listeTache) {
         divTasksBtn.appendChild(buttonComplete);
         divTasksBtn.appendChild(buttonUpdate);
         divTasksBtn.appendChild(buttonDelete);
-
-
     }
 }
 
@@ -73,3 +75,5 @@ newTask.addEventListener("submit", function (ev) {
     });
     getListTask(id);
 });
+
+
