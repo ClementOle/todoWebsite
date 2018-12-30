@@ -22,6 +22,27 @@ function afficheListTask(listeTache) {
         li.appendChild(p);
         p.classList.add("taskText");
         p.innerHTML = listeTache[tache].text;
+
+
+        let buttonComplete = document.createElement("button");
+        buttonComplete.classList.add("completeTaskBtn");
+        buttonComplete.innerHTML = "Terminer";
+        let buttonUpdate = document.createElement("button");
+        buttonComplete.classList.add("updateTaskBtn");
+        buttonUpdate.innerHTML = "Modifier";
+        let buttonDelete = document.createElement("button");
+        buttonDelete.classList.add("deleteTaskBtn");
+        buttonDelete.innerHTML = "Supprimer";
+
+        let divTasksBtn = document.createElement("div");
+        divTasksBtn.classList.add("tasksButton");
+        li.appendChild(divTasksBtn);
+
+        divTasksBtn.appendChild(buttonComplete);
+        divTasksBtn.appendChild(buttonUpdate);
+        divTasksBtn.appendChild(buttonDelete);
+
+
     }
 }
 
