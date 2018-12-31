@@ -22,17 +22,19 @@ function afficheListTask(listeTache) {
         li.className = "task";
         li.setAttribute("idTask", listeTache[tache].idTasks);
         tasksList.appendChild(li);
+
         let p = document.createElement("p");
         li.appendChild(p);
+
         p.classList.add("taskText");
         p.innerHTML = listeTache[tache].text;
-
 
         let buttonComplete = document.createElement("button");
         buttonComplete.classList.add("completeTaskBtn");
         buttonComplete.innerHTML = "Terminer";
+
         let buttonUpdate = document.createElement("button");
-        buttonComplete.classList.add("updateTaskBtn");
+        buttonUpdate.classList.add("updateTaskBtn");
         buttonUpdate.innerHTML = "Modifier";
         let buttonDelete = document.createElement("button");
         buttonDelete.classList.add("deleteTaskBtn");
@@ -64,8 +66,9 @@ function afficheListTask(listeTache) {
             ev.preventDefault();
             let idTask = buttonDelete.parentElement.parentElement.getAttribute("idTask");
             let url = urlApi + "/" + id + "/tasks/" + idTask;
+            let textTask = buttonDelete.parentElement.parentElement.firstElementChild.innerHTML;
 
-            var textUpdated = prompt("Entrez le texte de votre To Do", "null");
+            let textUpdated = prompt("Entrez le texte de votre To Do", textTask);
 
             if (textUpdated != null) {
                 let taskUpdated = {
@@ -89,10 +92,6 @@ function afficheListTask(listeTache) {
         });
     }
 }
-
-
-getListTask(id);
-
 
 newTask.addEventListener("submit", function (ev) {
     ev.stopPropagation();
@@ -118,6 +117,13 @@ newTask.addEventListener("submit", function (ev) {
     getListTask(id);
 });
 
+function getNbrTasks(idUtilisateur) {
+    let url = urlApi + "/" + idUtilisateur + "/tasks/count";
 
+    $.get(url, function (data) {
+        console.log(data);
+    });
+}
 
-
+getListTask(id);
+getNbrTasks(id);
