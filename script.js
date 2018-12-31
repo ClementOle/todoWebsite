@@ -132,11 +132,8 @@ function getNbrTasks(idUtilisateur) {
 
 
 function affichageNumeroPage() {
-    let pageApres = parseInt(page) + 1;
-    let pageAvant = parseInt(page) - 1;
-
-    pagePrecedente.setAttribute("href", "?page=" + pageAvant);
-    pageSuivante.setAttribute("href", "?page=" + pageApres);
+    pagePrecedente.setAttribute("href", "?page=" + parseInt(page) + 1);
+    pageSuivante.setAttribute("href", "?page=" + parseInt(page) - 1);
     numeroPage.innerHTML = page;
 
     if (page == 0) {
