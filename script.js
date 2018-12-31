@@ -6,7 +6,6 @@ const tasksList = document.querySelector(".tasksList");
 const newTask = document.getElementById("newTask");
 const textTask = document.getElementById("text");
 
-
 const id = 26;
 
 function getListTask(idUtilisateur) {
@@ -21,6 +20,7 @@ function afficheListTask(listeTache) {
     for (let tache in listeTache) {
         let li = document.createElement("li");
         li.className = "task";
+        li.setAttribute("idTask", listeTache[tache].idTasks);
         tasksList.appendChild(li);
         let p = document.createElement("p");
         li.appendChild(p);
@@ -45,6 +45,19 @@ function afficheListTask(listeTache) {
         divTasksBtn.appendChild(buttonComplete);
         divTasksBtn.appendChild(buttonUpdate);
         divTasksBtn.appendChild(buttonDelete);
+
+        buttonDelete.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            ev.preventDefault();
+            let idTask = buttonDelete.parentElement.parentElement.getAttribute("idTask");
+            let url = urlApi + "/" + id + "/tasks/" + idTask;
+
+            jQuery.ajax({
+                url: url,
+                type: "DELETE"
+            });
+            getListTask(id);
+        });
     }
 }
 
@@ -75,5 +88,7 @@ newTask.addEventListener("submit", function (ev) {
     });
     getListTask(id);
 });
+
+
 
 
