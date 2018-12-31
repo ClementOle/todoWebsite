@@ -86,7 +86,7 @@ function afficheListTask(listeTache) {
                 });
             }
             getListTask(id);
-        })
+        });
     }
 }
 
