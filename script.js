@@ -8,6 +8,11 @@ const textTask = document.getElementById("text");
 
 const id = 26;
 
+const pagePrecedente = document.getElementById("pagePrecedente");
+const numeroPage = document.getElementById("numeroPage");
+const pageSuivante = document.getElementById("pageSuivante");
+
+
 function getListTask(idUtilisateur) {
     let url = urlApi + "/" + idUtilisateur + "/tasks/?page=" + page;
     $.get(url, function (data) {
@@ -125,5 +130,20 @@ function getNbrTasks(idUtilisateur) {
     });
 }
 
+
+function affichageNumeroPage() {
+    let pageApres = parseInt(page) + 1;
+    let pageAvant = parseInt(page) - 1;
+
+    pagePrecedente.setAttribute("href", "?page=" + pageAvant);
+    pageSuivante.setAttribute("href", "?page=" + pageApres);
+    numeroPage.innerHTML = page;
+
+    if (page == 0) {
+        pagePrecedente.innerHTML = "";
+    }
+}
+
 getListTask(id);
 getNbrTasks(id);
+affichageNumeroPage();
