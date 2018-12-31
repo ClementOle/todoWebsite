@@ -58,6 +58,35 @@ function afficheListTask(listeTache) {
             });
             getListTask(id);
         });
+
+        buttonUpdate.addEventListener('click', function (ev) {
+            ev.stopPropagation();
+            ev.preventDefault();
+            let idTask = buttonDelete.parentElement.parentElement.getAttribute("idTask");
+            let url = urlApi + "/" + id + "/tasks/" + idTask;
+
+            var textUpdated = prompt("Entrez le texte de votre To Do", "null");
+
+            if (textUpdated != null) {
+                let taskUpdated = {
+                    "idTasks": idTask,
+                    "text": textUpdated,
+                    "idUtilisateur": id
+                };
+
+                jQuery.ajax({
+                    url: url,
+                    type: "PUT",
+                    data: JSON.stringify(taskUpdated),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            }
+            getListTask(id);
+        })
     }
 }
 
